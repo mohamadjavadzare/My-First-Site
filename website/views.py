@@ -4,13 +4,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
 def index_view(request):
-    return HttpResponse('<h1 style="background-color:powderblue; color=blue;font-family:courier;font-size=600%;text-align:center">Home Page\n<p>hello world!</p></h1>')
-
+    return render(request, 'website/index.html')
 
 def about_view(request):
-    return JsonResponse({'Name':'mmd javad' , 'Last name': 'Zare' , 'Nickname': 'Mikey' , 'Birthday':'3/28/2002'})
-
+    return render(request, 'website/about.html')
 
 def contact_view(requset):
-    pass
+    return render(requset, 'website/contact.html')
 
