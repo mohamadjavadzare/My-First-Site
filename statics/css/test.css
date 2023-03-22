@@ -1,0 +1,24 @@
+body {
+    background: url("image/image1.jpg" )  50% 0 fixed ;
+    background-size: 100%;
+    background-position: center;
+    height: 1050px;
+    padding: 100px 0 0 0; 
+}
+h1 {
+    color:rgb(80, 69, 231);
+    background-color: rgba(0, 0, 0, 0.4);
+  
+}
+
+h2 {
+    color:rgb(78, 67, 228);
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 4%;
+}
+
+h3 {
+    color:rgb(78, 67, 228);
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 4%;
+}
