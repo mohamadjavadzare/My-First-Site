@@ -10,6 +10,3 @@ def about_view(request):
 
 def contact_view(requset):
     return render(requset, 'website/contact.html')
-
-def test_view(requset):
-    return render(requset, 'website/test.html')
