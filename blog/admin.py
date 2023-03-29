@@ -13,3 +13,5 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
 
 admin.site.register(Post,PostAdmin)
+
+admin.site.register(Category)
