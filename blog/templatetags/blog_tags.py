@@ -22,3 +22,14 @@ upto.is_safe = True
 def latest_posts(arg=5):
     posts = Post.objects.filter(publish_status= True).order_by('-published_date')[:arg]
     return {'pop_posts': posts}
+
+
+@register.inclusion_tag('blog/right-side/blog-category.html', name='category')
+def category_list():
+    posts = Post.objects.filter(publish_status= True)
+    cat_dict = {}
+    categories = Category.objects.all()
+    for name in categories:
+        cat_dict[name] = posts.filter(category=name).count()
+    return {'categories': cat_dict }
+
