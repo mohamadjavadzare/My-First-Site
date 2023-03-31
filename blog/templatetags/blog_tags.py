@@ -19,6 +19,6 @@ def upto(value, delimiter=None):
 upto.is_safe = True
 
 @register.inclusion_tag('blog/right-side/blog-latest-posts.html', name='latest_posts')
-def latest_posts():
-    posts = Post.objects.filter(publish_status= True).order_by('-published_date')[:5]
+def latest_posts(arg=5):
+    posts = Post.objects.filter(publish_status= True).order_by('-published_date')[:arg]
     return {'pop_posts': posts}
