@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% load thumbnail %}
+{% load blog_tags %}
 <!-- start banner Area -->
 <section class="banner-area relative blog-home-banner" id="home">
 	<div class="overlay overlay-bg"></div>
@@ -104,7 +106,7 @@
 						<div class="user-details row">
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{post.author.get_full_name}}</a> <span
 									class="lnr lnr-user"></span></p>
-							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date}}</a> <span
+							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d M Y"}}</a> <span
 									class="lnr lnr-calendar-full"></span></p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_views}} Views</a> <span
 									class="lnr lnr-eye"></span></p>
@@ -114,7 +116,9 @@
 					</div>
 					<div class="col-lg-9 col-md-9 ">
 						<div class="feature-img">
-							<img class="img-fluid" src="{{post.image.url}}" alt="">
+							{% thumbnail post.image "540x304" crop="center" as im %}
+							<img class="img-fluid" src="{{im.url}}" max-width="{{im.width}}" max-height="{{im.height}}"  alt="">
+							{% endthumbnail %}
 						</div>
 						<a class="posts-title" href="{% url 'blog:single' pid=post.id %}">
 							<h3>{{post.title}}</h3>
@@ -159,7 +163,7 @@
 						</form>
 					</div>
 					{% include 'blog/right-side/blog-writer.html' %}
-					{% include 'blog/right-side/blog-popular-posts.html' %}
+					{% popular_posts %}
 					{% include 'blog/right-side/blog-ads.html' %}
 					{% include 'blog/right-side/blog-category.html' %}
 

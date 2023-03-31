@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% load thumbnail %}
+{% load blog_tags %}
 
 			<!-- start banner Area -->
 			<section class="relative about-banner">	
@@ -32,17 +34,17 @@
 								<div class="col-lg-12 meta-details">
 
 									<div class="user-details row" style="margin:auto; align-content: center;">
-										<ul class="social-links col-sm-auto " style="margin: auto; margin-top: 1.5%; text-align:right;">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="https://github.com/mjz589/"><i class="fa fa-github"></i></a></li>
-											<li><a href="#"><i class="fa fa-behance"></i></a></li>
-										</ul>
+										
 										<p class="user-name col-sm-auto " style="margin:auto; text-align: center; align-self:center;"><a href="#">{{post.author.get_full_name}}</a> <span class="lnr lnr-user"></span></p>
 										<p class="date col-sm-auto " style="margin:auto; text-align: center; align-self:center;"><a href="#">{{post.published_date|date:"d M Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-sm-auto " style="margin:auto; text-align: center; align-self:center;"><a href="#">{{post.counted_views}} Views</a> <span class="lnr lnr-eye"></span></p>
 										<p class="comments col-sm-auto " style="margin:auto; text-align: center; align-self:center;"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>
-																											
+										<ul class="social-links col-sm-12 " style="margin: auto; margin-top: 1.5%; text-align:left;">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="https://github.com/mjz589/"><i class="fa fa-github"></i></a></li>
+											<li><a href="#"><i class="fa fa-behance"></i></a></li>
+										</ul>																
 									</div>
 									
 								</div>
@@ -86,10 +88,12 @@
 									{% if previous_post %}
 									<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
+											{% thumbnail previous_post.image "90x60" crop="center" as im %}
+											<a href="{% url 'blog:single' previous_post.id %}"><img class="img-fluid" src="{{im.url}}" width="{{ im.width }}" height="{{ im.height }}" alt=""></a>
+											{% endthumbnail %}
 										</div>
 										<div class="arrow">
-											<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+											<a href="{% url 'blog:single' previous_post.id %}"><span class="lnr text-white lnr-arrow-left"></span></a>
 										</div>
 										
 										<div class="detials">
@@ -105,10 +109,12 @@
 											<a href="{% url 'blog:single' next_post.id %}"><h4>{{next_post.title}}</h4></a>
 										</div>
 										<div class="arrow">
-											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
+											<a href="{% url 'blog:single' next_post.id %}"><span class="lnr text-white lnr-arrow-right"></span></a>
 										</div>
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
+											{% thumbnail next_post.image "90x60" crop="center" as im %}
+											<a href="{% url 'blog:single' next_post.id %}"><img class="img-fluid" src="{{im.url}}" width="{{ im.width }}" height="{{ im.height }}" alt=""></a>
+											{% endthumbnail %}
 										</div>										
 									</div>	
 									{% endif %}								
@@ -242,7 +248,7 @@
 			                        </form>
 								</div>
 								{% include 'blog/right-side/blog-writer.html' %}
-								{% include 'blog/right-side/blog-popular-posts.html' %}
+								{% popular_posts %}
 								{% include 'blog/right-side/blog-ads.html' %}
 								{% include 'blog/right-side/blog-category.html' %}
 								<div class="single-sidebar-widget newsletter-widget">
