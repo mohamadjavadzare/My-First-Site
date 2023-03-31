@@ -6,8 +6,13 @@ from .models import *
 # Create your views here.
 
 def blog_view(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    published = Post.objects.filter(published_date__lte=timezone.now())
+    for post in published:
+        post.publish_status = True
+        post.save()  # turn publish_status on(Ture) if published_date is passed
+    posts = Post.objects.filter(publish_status = True).order_by('-published_date')
     return render(request, 'blog/blog-home.html', context={'posts': posts})
+
 
 def blog_single_view(request,pid):
     post = get_object_or_404(Post, pk=pid , published_date__lte=timezone.now())

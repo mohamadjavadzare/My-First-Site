@@ -18,7 +18,7 @@ def upto(value, delimiter=None):
     return value.split(delimiter)[0]
 upto.is_safe = True
 
-@register.inclusion_tag('blog/right-side/blog-popular-posts.html')
-def popular_posts():
-    posts = Post.objects.all().order_by('-counted_views')[:5]
+@register.inclusion_tag('blog/right-side/blog-latest-posts.html', name='latest_posts')
+def latest_posts():
+    posts = Post.objects.filter(publish_status= True).order_by('-published_date')[:5]
     return {'pop_posts': posts}
