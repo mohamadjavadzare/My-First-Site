@@ -1,7 +1,9 @@
 from django.shortcuts import render,get_object_or_404
 
+
 from django.utils import timezone
 from .models import *
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Create your views here.
 
@@ -11,7 +13,17 @@ def blog_view(request, **kwargs):
     for post in posts: # turn publish_status on(Ture) if published_date is passed
         if post.publish_status == False:
             post.publish_status = True
-            post.save()  
+            post.save() 
+
+    # pagination
+    posts = Paginator(posts, 2)
+    try :
+        page_number = request.GET.get('page')
+        posts = posts.get_page(page_number)
+    except PageNotAnInteger:
+        posts = posts.get_page(1)
+    except EmptyPage:
+        posts = posts.get_page(1)
 
     if kwargs.get('cat_name') != None:  # posts by category
         posts = posts.filter(category__name=kwargs['cat_name'])

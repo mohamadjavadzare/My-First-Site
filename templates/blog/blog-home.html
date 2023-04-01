@@ -32,8 +32,8 @@
 						<div class="overlay overlay-bg"></div>
 						<a href="#" target="_blank">
 							<div class="thumb">
-								<img class="content-image img-fluid d-block mx-auto" src="{% static 'img/blog/cat-widget1.jpg' %}"
-									alt="">
+								<img class="content-image img-fluid d-block mx-auto"
+									src="{% static 'img/blog/cat-widget1.jpg' %}" alt="">
 							</div>
 							<div class="content-details">
 								<h4 class="content-title mx-auto text-uppercase">Social life</h4>
@@ -50,8 +50,8 @@
 						<div class="overlay overlay-bg"></div>
 						<a href="#" target="_blank">
 							<div class="thumb">
-								<img class="content-image img-fluid d-block mx-auto" src="{% static 'img/blog/cat-widget2.jpg' %}"
-									alt="">
+								<img class="content-image img-fluid d-block mx-auto"
+									src="{% static 'img/blog/cat-widget2.jpg' %}" alt="">
 							</div>
 							<div class="content-details">
 								<h4 class="content-title mx-auto text-uppercase">Politics</h4>
@@ -68,8 +68,8 @@
 						<div class="overlay overlay-bg"></div>
 						<a href="#" target="_blank">
 							<div class="thumb">
-								<img class="content-image img-fluid d-block mx-auto" src="{% static 'img/blog/cat-widget3.jpg' %}"
-									alt="">
+								<img class="content-image img-fluid d-block mx-auto"
+									src="{% static 'img/blog/cat-widget3.jpg' %}" alt="">
 							</div>
 							<div class="content-details">
 								<h4 class="content-title mx-auto text-uppercase">Food</h4>
@@ -95,19 +95,21 @@
 					<div class="col-lg-3  col-md-3 meta-details">
 						<ul class="tags">
 							{% for cat in post.category.all %}
-								{% if forloop.last %}
-									<li><a href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a></li>
-								{% else %}
-									<li><a href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a></li>,
-								{% endif %}
-								
+							{% if forloop.last %}
+							<li><a href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a></li>
+							{% else %}
+							<li><a href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a></li>,
+							{% endif %}
+
 							{% endfor %}
 						</ul>
 						<div class="user-details row">
-							<p class="user-name col-lg-12 col-md-12 col-6"><a href="{% url 'blog:author' author_username=post.author.username %}">{{post.author.get_full_name}}</a> <span
-									class="lnr lnr-user"></span></p>
-							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d M Y"}}</a> <span
-									class="lnr lnr-calendar-full"></span></p>
+							<p class="user-name col-lg-12 col-md-12 col-6"><a
+									href="{% url 'blog:author' author_username=post.author.username %}">{{post.author.get_full_name}}</a>
+								<span class="lnr lnr-user"></span>
+							</p>
+							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d M
+									Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_views}} Views</a> <span
 									class="lnr lnr-eye"></span></p>
 							<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span
@@ -117,7 +119,8 @@
 					<div class="col-lg-9 col-md-9 ">
 						<div class="feature-img">
 							{% thumbnail post.image "540x304" crop="center" as im %}
-							<img class="img-fluid" src="{{im.url}}" max-width="{{im.width}}" max-height="{{im.height}}"  alt="">
+							<img class="img-fluid" src="{{im.url}}" max-width="{{im.width}}" max-height="{{im.height}}"
+								alt="">
 							{% endthumbnail %}
 						</div>
 						<a class="posts-title" href="{% url 'blog:single' pid=post.id %}">
@@ -129,29 +132,60 @@
 					</div>
 				</div>
 				{% endfor %}
+
+				{% if posts.has_other_pages %}
 				<nav class="blog-pagination justify-content-center d-flex">
 					<ul class="pagination">
+
+
+						{% if posts.has_previous %}
+
+						{% if posts.page != 1 %}
 						<li class="page-item">
-							<a href="#" class="page-link" aria-label="Previous">
+							<a href="?page=1" class="page-link" aria-label="First">
+								<span aria-hidden="true">
+									<span> First </span>
+								</span>
+							</a>
+						</li>
+						{% if posts.page != 2 %}
+						<li class="page-item">
+							<a href="?page={{ posts.previous_page_number }}" class="page-link" aria-label="Previous">
 								<span aria-hidden="true">
 									<span class="lnr lnr-chevron-left"></span>
 								</span>
 							</a>
 						</li>
-						<li class="page-item"><a href="#" class="page-link">01</a></li>
-						<li class="page-item active"><a href="#" class="page-link">02</a></li>
-						<li class="page-item"><a href="#" class="page-link">03</a></li>
-						<li class="page-item"><a href="#" class="page-link">04</a></li>
-						<li class="page-item"><a href="#" class="page-link">09</a></li>
+						{% endif %}
+
+						{% endif %}
+						<li class="page-item"><a href="?page={{posts.previous_page_number}}"
+								class="page-link">{{posts.previous_page_number}}</a></li>
+
+						{% endif %}
+
+						<li class="page-item active"><a href="#" class="page-link">{{posts.number}}</a></li>
+						{% if posts.has_next %}
+						<li class="page-item"><a href="?page={{posts.next_page_number}}"
+								class="page-link">{{posts.next_page_number}}</a></li>
 						<li class="page-item">
-							<a href="#" class="page-link" aria-label="Next">
+							<a href="?page={{posts.next_page_number}}" class="page-link" aria-label="Next">
 								<span aria-hidden="true">
 									<span class="lnr lnr-chevron-right"></span>
 								</span>
 							</a>
 						</li>
+						<li class="page-item">
+							<a href="?page={{posts.paginator.num_pages}}" class="page-link" aria-label="Last">
+								<span aria-hidden="true">
+									<span> Last </span>
+								</span>
+							</a>
+						</li>
+						{% endif %}
 					</ul>
 				</nav>
+				{% endif %}
 			</div>
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
@@ -161,7 +195,7 @@
 					{% include 'blog/right-side/blog-ads.html' %}
 					{% category %}
 					{% include 'blog/right-side/blog-newsletter.html' %}
-					{% include 'blog/right-side/blog-tag-cloud.html' %}	
+					{% include 'blog/right-side/blog-tag-cloud.html' %}
 				</div>
 			</div>
 		</div>
