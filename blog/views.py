@@ -15,6 +15,12 @@ def blog_view(request, **kwargs):
             post.publish_status = True
             post.save() 
 
+    if kwargs.get('cat_name') != None:  # posts by category
+        posts = posts.filter(category__name=kwargs['cat_name'])
+
+    if kwargs.get('author_username') != None:
+        posts = posts.filter(author__username=kwargs['author_username'])
+
     # pagination
     posts = Paginator(posts, 2)
     try :
@@ -25,11 +31,7 @@ def blog_view(request, **kwargs):
     except EmptyPage:
         posts = posts.get_page(1)
 
-    if kwargs.get('cat_name') != None:  # posts by category
-        posts = posts.filter(category__name=kwargs['cat_name'])
 
-    if kwargs.get('author_username') != None:
-        posts = posts.filter(author__username=kwargs['author_username'])
 
     context={'posts': posts}
     return render(request, 'blog/blog-home.html', context)
