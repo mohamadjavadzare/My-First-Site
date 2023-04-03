@@ -1,5 +1,7 @@
 asgiref==3.6.0
 Django==3.2.4
+django-extensions==3.2.1
+django-robots==5.0
 Pillow==9.4.0
 python-decouple==3.8
 pytz==2022.7.1
