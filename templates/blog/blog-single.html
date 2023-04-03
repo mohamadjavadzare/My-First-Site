@@ -3,7 +3,7 @@
 {% block content %}
 {% load thumbnail %}
 {% load blog_tags %}
-
+{% load humanize %}
 <!-- start banner Area -->
 <section class="relative about-banner">
 	<div class="overlay overlay-bg"></div>
@@ -45,7 +45,7 @@
 									href="#">{{post.published_date|date:"d M Y"}}</a> <span
 									class="lnr lnr-calendar-full"></span></p>
 							<p class="view col-sm-auto " style="margin:auto; text-align: center; align-self:center;"><a
-									href="#">{{post.counted_views}} Views</a> <span class="lnr lnr-eye"></span></p>
+									href="#">{{post.counted_views|intcomma}} Views</a> <span class="lnr lnr-eye"></span></p>
 							<p class="comments col-sm-auto "
 								style="margin:auto; text-align: center; align-self:center;"><a href="#">06 Comments</a>
 								<span class="lnr lnr-bubble"></span></p>

@@ -6,12 +6,14 @@
         {% for post in latest_posts %}
         <div class="single-recent-blog-post item">
             <div class="thumb">
+                <a href="{% url 'blog:single' pid=post.id %}">
                 {% thumbnail post.image "360x260" crop="center" as im %}
                 <img class="img-fluid" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
                     alt="">
                 {% empty %}
                 <p>No image</p>
                 {% endthumbnail %}
+            </a>
             </div>
             <div class="details">
                 <div class="tags">
