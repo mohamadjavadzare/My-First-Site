@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,9 +51,14 @@ INSTALLED_APPS = [
     'robots',
     'ckeditor', # CKEditor config
     'ckeditor_uploader', # CKEditor media uploader
-    
+    'captcha',
 
 ]
+# captcha admin settings
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
 # sites framework
 SITE_ID = 2
 
@@ -65,7 +71,6 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH="uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-
 CKEDITOR_CONFIGS = {
     'default':
         {
@@ -76,6 +81,7 @@ CKEDITOR_CONFIGS = {
             ]),
         },
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

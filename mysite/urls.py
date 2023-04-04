@@ -38,10 +38,11 @@ urlpatterns = [
          name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^robots\.txt', include('robots.urls')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')), # The CKEditor path
+    path('captcha/', include('captcha.urls')),
 ]
 
 # admin interface Header
-admin.site.site_header = 'My First Site Header'
+admin.site.site_header = 'Mikey'
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
