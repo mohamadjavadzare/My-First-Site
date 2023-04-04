@@ -20,6 +20,10 @@ def blog_view(request, **kwargs):
 
     if kwargs.get('author_username') != None:
         posts = posts.filter(author__username=kwargs['author_username'])
+    
+    if kwargs.get('tag_name') != None:
+        posts = posts.filter(tags__name__in=[kwargs['tag_name']])
+
 
     # pagination
     posts = Paginator(posts, 2)
@@ -48,7 +52,7 @@ def blog_single_view(request,pid):
     previous_post = Post.objects.filter(publish_status=True,
                                          published_date__lt=post.published_date,
                                             ).order_by('published_date').last()
-    
+
     context = {'post': post, 'next_post': next_post, 'previous_post': previous_post}
     return render(request, 'blog/blog-single.html', context)
 
