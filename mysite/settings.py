@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'robots',
-    'django_summernote',
+    'ckeditor', # CKEditor config
+    'ckeditor_uploader', # CKEditor media uploader
     
 
 ]
@@ -58,6 +59,10 @@ SITE_ID = 2
 # robots
 ROBOTS_USE_HOST = False
 ROBOTS_USE_SITEMAP = False
+
+#CKEditor
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH="uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
