@@ -14,14 +14,11 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             new_contact = form.save(commit=False)
-            name = form.cleaned_data['name']
-            form.save()
-            contacts = Contact.objects.filter(name=name)
-            for con in contacts:
-                con.name = 'Unknown'
-                con.save()
+            new_contact.name = 'Unknown'     # warning simple-captcha is enabled.
+            new_contact.save()
             messages.add_message(request, messages.SUCCESS, 'Your ticket submited successfully.')
         else:
+            print('khar dare nemishe??????????????????/')
             messages.add_message(request, messages.ERROR, "Your ticket didn't submit, make sure you have a valid ticket and try again.")
     form = ContactForm()
     return render(request, 'website/contact.html' , context={'form': form})

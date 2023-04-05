@@ -4,6 +4,10 @@ from captcha.fields import CaptchaField
 
 class ContactForm(ModelForm):
     captcha = CaptchaField()
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields['subject'].required = False
+        
     class Meta:
         model = Contact
         fields = '__all__'

@@ -5,7 +5,7 @@ from django.db import models
 class Contact(models.Model):
     name = models.CharField(max_length=80)
     email = models.EmailField()
-    subject = models.CharField(max_length=100, blank=True, default="")
+    subject = models.CharField(max_length=100, null=True, blank=True, default=None)
     message = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
