@@ -5,8 +5,8 @@ from django.template.defaultfilters import stringfilter
 register = template.Library()
 
 @register.simple_tag(name='total_comments')
-def get_total_comment():
-    pass
+def get_total_comment(pid):
+    return Comment.objects.filter(post=pid, approved=True).count()
 
 @register.simple_tag(name='total_likes')
 def get_total_like():

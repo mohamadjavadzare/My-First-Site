@@ -8,7 +8,7 @@
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="{% static 'img/fav.png' %}">
+    <link rel="shortcut icon" href="{% static 'img/i4.jpg' %}">
     <!-- Author Meta -->
     <meta name="author" content="colorlib">
     <!-- Meta Description -->
@@ -63,30 +63,7 @@
                   </div>
                   <nav id = nav-menu-container">
                     <ul class = "nav-menu">
-                        
-        {% if messages %}
-        {% for message in messages %}
-          <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-        {% endfor %}
-      {% endif %}
-    
-      {% if form.errors %}
-        <div class="alert alert-error">
-          <h4>Please fix the following errors</h4>
-          <ul>
-            {% for field in form %}
-              {% if field.errors %}
-                {% for error in field.errors %}
-                  <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-          </ul>
-          {% if form.non_field_errors %}
-            {{ form.non_field_errors }}
-          {% endif %}
-        </div>
-      {% endif %}
+                      {% include 'messages.html' %}
                     </ul>
                 </nav>
                   <nav id="nav-menu-container">

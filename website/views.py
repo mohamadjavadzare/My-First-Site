@@ -18,7 +18,6 @@ def contact_view(request):
             new_contact.save()
             messages.add_message(request, messages.SUCCESS, 'Your ticket submited successfully.')
         else:
-            print('khar dare nemishe??????????????????/')
             messages.add_message(request, messages.ERROR, "Your ticket didn't submit, make sure you have a valid ticket and try again.")
     form = ContactForm()
     return render(request, 'website/contact.html' , context={'form': form})
