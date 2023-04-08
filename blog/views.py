@@ -1,11 +1,12 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404 , HttpResponseRedirect
 
 from django.utils import timezone
 from .models import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from blog.forms import *
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 # Create your views here.
 
 def blog_view(request, **kwargs):
@@ -66,15 +67,28 @@ def blog_single_view(request,pid):
         else:
             messages.add_message(request, messages.ERROR, "Your comment didn't submit, make sure you have a comment ticket and try again.")
 
-    form = CommentForm()
-    context = { 'post': post,
-                'next_post': next_post,
-                'previous_post': previous_post,
-                'comments': comments,
-                'form': form,
-                    }
-    
-    return render(request, 'blog/blog-single.html', context)
+    if not post.login_require :
+        form = CommentForm()
+        context = { 'post': post,
+                    'next_post': next_post,
+                    'previous_post': previous_post,
+                    'comments': comments,
+                    'form': form,
+                        }
+        return render(request, 'blog/blog-single.html', context)
+    else:
+        if request.user.is_authenticated:
+            form = CommentForm()
+            context = { 'post': post,
+                        'next_post': next_post,
+                        'previous_post': previous_post,
+                        'comments': comments,
+                        'form': form,
+                            }
+            return render(request, 'blog/blog-single.html', context)
+        else:
+            return render(request, 'account/login.html', )
+            
 
 
 def blog_search(request):

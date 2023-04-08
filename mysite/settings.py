@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #I myself add this bellow apps
     'taggit',
+
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',
+    'account.apps.AccountConfig',
+    
     'sorl.thumbnail',
     'django.contrib.humanize',
     'django_extensions',
@@ -54,6 +57,25 @@ INSTALLED_APPS = [
     'captcha',
 
 ]
+
+
+#auth
+AUTHENTICATION_BACKENDS = ('account.models.EmailBackend',)
+
+import os
+#email
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+# DEFAULT_FROM_EMAIL = 'testmail@gmail.com'
+#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+#EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_mail")
+
+
 # captcha admin settings
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha',
@@ -89,6 +111,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    'django_otp.middleware.OTPMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
