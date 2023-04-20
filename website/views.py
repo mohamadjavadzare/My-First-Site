@@ -32,3 +32,9 @@ def newsletter_view(request):
             messages.add_message(request, messages.ERROR, "Your email sent didn't submit, make sure you write a valid email and try again.")
     form = NewsletterForm()
     return render(request, 'website/index.html' , context={'form': form})
+
+from django.shortcuts import redirect
+
+def redirect_view(request):
+#     response = redirect('/redirect-success/')
+    return render(request, 'mending.html')

@@ -29,6 +29,7 @@ sitemaps = {
     'blog' : BlogSitemap,
 }
 
+from website.views import redirect_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -48,3 +49,11 @@ admin.site.site_header = 'Mikey'
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#MAINTENANCE_MODE
+from django.urls import re_path
+from django.conf import settings
+from django.views.generic.base import TemplateView
+
+if settings.MAINTENANCE_MODE:
+   urlpatterns.insert(0, re_path(r'^', TemplateView.as_view(template_name='C:/Users/acer/Documents/GitHub/My-First-Site/templates/maintenance.html'), name='maintenance'))
