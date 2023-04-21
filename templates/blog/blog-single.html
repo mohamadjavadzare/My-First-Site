@@ -71,6 +71,18 @@
 						<p class="excert">
 							{{post.content|safe}}
 						</p>
+						<p class="excert">
+							{% if post.video %}
+							<video width="320" height="240" controls>
+								<source src="{{post.video.url}}" type="video/mp4">
+							  </video>
+							{% elif post.audio %}
+							<audio controls>
+								<source src="{{post.audio.url}}" type="audio/mpeg">
+							  </audio>
+							{% endif %}
+							{{post.handout.url}}
+						</p>
 					</div>
 					<div class="col-lg-12 meta-details">
 

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor', # CKEditor config
     'ckeditor_uploader', # CKEditor media uploader
     'captcha',
+    'compressor',
 
 ]
 
@@ -103,6 +104,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 
 ROOT_URLCONF = 'mysite.urls'
@@ -173,3 +175,4 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

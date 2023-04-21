@@ -17,3 +17,4 @@ mysqlclient
 django_otp
 django-multi-captcha-admin==2.0.0
 django-otp==1.1.6
+django-simple-captcha
