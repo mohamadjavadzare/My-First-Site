@@ -58,7 +58,8 @@
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="https://github.com/mjz589/"><i class="fa fa-github"></i></a></li>
 								<li><a href="https://t.me/www_Mohammad"><i class="fa fa-telegram"></i></a></li>
-								<li><a href="https://www.instagram.com/mmd.javad__/"><i class="fa fa-instagram"></i></a></li>
+								<li><a href="https://www.instagram.com/mmd.javad__/"><i class="fa fa-instagram"></i></a>
+								</li>
 							</ul>
 						</div>
 
@@ -75,13 +76,16 @@
 							{% if post.video %}
 							<video width="320" height="240" controls>
 								<source src="{{post.video.url}}" type="video/mp4">
-							  </video>
-							{% elif post.audio %}
+							</video>
+							{% endif %}
+						</p>
+						<p>{% if post.audio %}
 							<audio controls>
 								<source src="{{post.audio.url}}" type="audio/mpeg">
-							  </audio>
+							</audio>
 							{% endif %}
-							{{post.handout.url}}
+						</p>
+
 						</p>
 					</div>
 					<div class="col-lg-12 meta-details">
@@ -214,10 +218,10 @@
 						{% csrf_token %}
 						<input type="hidden" name="post" value="{{post.id}}">
 						{% if request.user.is_authenticated %}
-							<input type="hidden" name="name" value="{{request.user.username}}">
-							<h4>as {{request.user.get_full_name}}:</h4>
-							<input type="hidden" name="email" value="{{request.user.email}}">
-							
+						<input type="hidden" name="name" value="{{request.user.username}}">
+						<h4>as {{request.user.get_full_name}}:</h4>
+						<input type="hidden" name="email" value="{{request.user.email}}">
+
 						{% else %}
 						<div class="form-group form-inline">
 							<div class="form-group col-lg-6 col-md-12 name">
@@ -238,7 +242,7 @@
 							<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
 								required=""></textarea>
-								
+
 						</div>
 						<div class="pb-3 pt-3">{{form.captcha}}</div>
 						<button type="submit" class="primary-btn text-uppercase">Post Comment</button>
@@ -249,13 +253,7 @@
 			</div>
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
-					<div class="single-sidebar-widget search-widget">
-						<form class="search-form" action="#">
-							<input placeholder="Search Posts" name="search" type="text" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Search Posts'">
-							<button type="submit"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+					{% include 'blog/right-side/blog-search.html' %}
 					{% include 'blog/right-side/blog-writer.html' %}
 					{% latest_posts %}
 					{% include 'blog/right-side/blog-ads.html' %}
