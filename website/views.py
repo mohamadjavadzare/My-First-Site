@@ -33,8 +33,8 @@ def newsletter_view(request):
     form = NewsletterForm()
     return render(request, 'website/index.html' , context={'form': form})
 
-from django.shortcuts import redirect
+# from django.shortcuts import redirect
 
-def redirect_view(request):
-#     response = redirect('/redirect-success/')
-    return render(request, 'mending.html')
+# def redirect_view(request):
+# #     response = redirect('/redirect-success/')
+#     return render(request, 'mending.html')

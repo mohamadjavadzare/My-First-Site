@@ -36,7 +36,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "statics"
 ]
 
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True
 
 import django.conf
 #compressor settings
