@@ -35,8 +35,8 @@ def send_forget_password_mail(email,token):
     # SET EMAIL LOGIN REQUIREMENTS
     # =============================================================================
     from decouple import config
-    gmail_user = config("gmail_user")
-    gmail_app_password = config("gmail_app_password")
+    gmail_user = 'mjz589.2002@gmail.com'
+    gmail_app_password = 'pnxrpypdfskqubmy'
 
     # =============================================================================
     # SET THE INFO ABOUT THE SAID EMAIL
